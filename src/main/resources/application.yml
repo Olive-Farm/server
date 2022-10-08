@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: rest-api
+  profiles:
+    active: dev
+
+server:
+  port: 8080
+
+---
+
+spring:
+  application:
+    name: rest-api
+  profiles:
+    active: prod
+
+server:
+  port: 8080
+
+
