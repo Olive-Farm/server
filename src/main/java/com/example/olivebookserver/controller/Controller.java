@@ -1,5 +1,6 @@
 package com.example.olivebookserver.controller;
 
+import com.example.olivebookserver.dto.Info;
 import com.example.olivebookserver.service.OliveService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,23 +16,24 @@ public class Controller {
     }
 
     @GetMapping("/get")
-    ResponseEntity<?> getHelloWorld(){
-        return new ResponseEntity<>("Hello World", HttpStatus.OK);
+    ResponseEntity<?> getHelloWorld(@RequestParam(required = false) String name){
+
+        return new ResponseEntity<>(oliveService.myName(name), HttpStatus.OK);
     }
 
-    @PostMapping("/post")
-    ResponseEntity<?> postHelloWorld(){
-        return new ResponseEntity<>("Hello World By Post Method",HttpStatus.OK);
+    @PostMapping("/post/{name}")
+    ResponseEntity<?> postHelloWorld(@PathVariable("name") String name){
+        return new ResponseEntity<>(oliveService.myName(name),HttpStatus.OK);
     }
 
     @PutMapping("/put")
-    ResponseEntity<?> putHelloWorld(){
-        return new ResponseEntity<>("Hello World By Put Method",HttpStatus.OK);
+    ResponseEntity<?> putHelloWorld(@RequestBody Info info){
+        return new ResponseEntity<>(oliveService.myInfo(info),HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    ResponseEntity<?> deleteHelloWorld(){
-        return new ResponseEntity<>("Hello World By Delete Method",HttpStatus.OK);
+    ResponseEntity<?> deleteHelloWorld(@RequestHeader String role, @RequestBody Info info){
+        return new ResponseEntity<>(oliveService.myInfoWithRole(role, info),HttpStatus.OK);
     }
 }
 
