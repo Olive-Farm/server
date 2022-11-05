@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 아래 url, username, password는 로컬 환경에 맞게 입력해야 합니다.
+    # 보통 3306이고 뒤에는 테이블 이름 입력하시면 돼요.
+    # username과 password는 컴퓨터마다 다르기 때문에 확인해보고 넣어주세요.
+    url: jdbc:mysql://localhost:3306/test02
+    username: root
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: create
