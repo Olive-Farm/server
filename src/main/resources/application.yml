@@ -18,4 +18,35 @@ spring:
 server:
   port: 8080
 
+---
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 아래 url, username, password는 로컬 환경에 맞게 입력해야 합니다.
+    # 보통 3306이고 뒤에는 테이블 이름 입력하시면 돼요.
+    # username과 password는 컴퓨터마다 다르기 때문에 확인해보고 넣어주세요.
+    url: jdbc:mysql://127.0.0.1:3306/olivebook?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+    database: mysql
+
+---
+
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+---
+
+mybatis:
+  type-aliases-package: com.example.dto.Info
+  mapper-locations: classpath:com/example/olivebook/mybatis/**/*.xml
 
