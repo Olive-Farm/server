@@ -16,15 +16,15 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "list_item")
+@Entity(name = "INFO")
 
 public class Info {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id_LIST_ITEM;
+    private String id;
     private String USER_ID;
-    private String list_Date;
-    private String list_Time;
+    private String list_Item_Date;
+    private String list_Item_Time;
     private String list_Item_Name;
     private String list_Item_Amount;
     private String list_Item_Cat;

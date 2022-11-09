@@ -2,6 +2,7 @@ package com.example.olivebookserver.controller;
 
 import com.example.olivebookserver.dto.Info;
 import com.example.olivebookserver.service.OliveService;
+import com.example.olivebookserver.mybatis.InfoMapper;
 
 import java.util.*;
 
@@ -22,52 +23,46 @@ import java.util.List;
 @RequestMapping("/olivebook")
 public class Controller {
 
-    private Map<String, Info> itemMap;
+    private InfoMapper mapper;
 
-    @PostConstruct
-    public void init() {
-        itemMap = new HashMap<String, Info>();
-        itemMap.put("1", new Info("1", "abc", "20221108", "2022-11-08 00:11:30", "테스트1", "50000", "음식"));
-        itemMap.put("2", new Info("2", "abc", "20221108", "2022-11-08 00:11:30", "테스트2", "-50000", "음식"));
-        itemMap.put("3", new Info("3", "abc", "20221108", "2022-11-08 00:11:30", "테스트3", "40000", "음식"));
+    public Controller(InfoMapper mapper) {
+        this.mapper = mapper;
     }
 
+    //데이터 특정 조회
     @GetMapping("/list/{id}")
     public Info getInfo(@PathVariable("id") String id) {
-        return itemMap.get(id);
+        return mapper.getInfo(id);
     }
 
+    //데이터 전체 조회
     @GetMapping("/list/all")
     public List<Info> getInfoList() {
-        return new ArrayList<Info>(itemMap.values());
+        return mapper.getInfoList();
     }
 
+    //데이터 삽입
     @PostMapping("/list/{id}")
     public void postInfo(@PathVariable("id") String id, @RequestParam("user_id") String user_id
             , @RequestParam("list_item_date") String list_item_date, @RequestParam("list_item_time") String list_item_time,
             @RequestParam("list_item_name") String list_item_name,
             @RequestParam("list_item_amount") String list_item_amount, @RequestParam("list_item_cat") String list_item_cat) {
-        Info itemInfo = new Info(id, user_id, list_item_date, list_item_time, list_item_name, list_item_amount, list_item_cat);
-        itemMap.put(id, itemInfo);
+        mapper.insertInfo(id, user_id, list_item_date, list_item_time, list_item_name, list_item_amount, list_item_cat);
     }
 
+    //데이터 수정
     @PutMapping("/list/{id}")
     public void putInfo(@PathVariable("id") String id, @RequestParam("user_id") String user_id
             , @RequestParam("list_item_date") String list_item_date, @RequestParam("list_item_time") String list_item_time,
                         @RequestParam("list_item_name") String list_item_name,
                         @RequestParam("list_item_amount") String list_item_amount, @RequestParam("list_item_cat") String list_item_cat) {
-        Info itemInfo = itemMap.get(id);
-        itemInfo.setUSER_ID(user_id);
-        itemInfo.setList_Date(list_item_date);
-        itemInfo.setList_Time(list_item_time);
-        itemInfo.setList_Item_Name(list_item_name);
-        itemInfo.setList_Item_Amount(list_item_amount);
-        itemInfo.setList_Item_Cat(list_item_cat);
+        mapper.updateInfo(id, user_id, list_item_date, list_item_time, list_item_name, list_item_amount, list_item_cat);
     }
 
+    //데이터 삭제
     @DeleteMapping("/list/{id}")
     public void deleteInfo(@PathVariable("id") String id) {
-        itemMap.remove(id);
+        mapper.deleteInfo(id);
     }
 
     /*@Autowired

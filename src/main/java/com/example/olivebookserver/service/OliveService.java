@@ -36,7 +36,7 @@ public class OliveService {
 
 
     public String myInfo(Info info){
-        return myName(info.getId_LIST_ITEM())+" / ";
+        return myName(info.getId())+" / ";
     }
 
     public String myInfoWithRole(String role, Info info){
