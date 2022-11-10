@@ -9,23 +9,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 
 /**
- * member라는 값이 입력되도록 임시로 넣어놨습니다.
+ * SPENDING 테이블에 대한 클래스입니다. 이미지 관한 변수는 추후 구현
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "INFO")
+@Entity(name = "SPENDING")
 
-public class Info {
+public class Spending {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer SP_ID;
     private String USER_ID;
-    private String list_Item_Date;
-    private String list_Item_Time;
-    private String list_Item_Name;
-    private String list_Item_Amount;
-    private String list_Item_Cat;
+    private Timestamp SP_Time;
+    private String SP_Name;
+    private Integer SP_Amount;
+    private String SP_Category;
+    private String SP_Method;
+    private String SP_Memo;
 }

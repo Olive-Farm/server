@@ -1,6 +1,6 @@
 package com.example.olivebookserver.service;
 
-import com.example.olivebookserver.dto.Info;
+import com.example.olivebookserver.dto.Spending;
 //import com.example.olivebookserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class OliveService {
         return mapper.getList();
     }*/
 
-    public String myName(String ID) {
+ /*   public String myName(String ID) {
         if (ID != null) {
             return "my name is " + ID;
         } else {
@@ -30,16 +30,16 @@ public class OliveService {
         } else {
             return "no name param";
         }
+    }*/
+
+
+
+
+    /*public String myInfo(Spending spending){
+        return myspID(spending.getSpID())+" / ";
     }
 
-
-
-
-    public String myInfo(Info info){
-        return myName(info.getId())+" / ";
-    }
-
-    public String myInfoWithRole(String role, Info info){
+    public String myInfoWithRole(String role, Spending info){
         return role +" / "+ myInfo(info);
-    }
+    }*/
 }
