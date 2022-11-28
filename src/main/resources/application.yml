@@ -47,6 +47,6 @@ spring:
 ---
 
 mybatis:
-  type-aliases-package: com.example.dto.Info
+  type-aliases-package: com.example.dto.Spending
   mapper-locations: classpath:com/example/olivebook/mybatis/**/*.xml
 
