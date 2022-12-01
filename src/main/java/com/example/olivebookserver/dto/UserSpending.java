@@ -10,18 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "USER_SPENDING")
+//@Entity(name = "USER_SPENDING")
 public class UserSpending {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Timestamp time;
-    private String name;
-    private Integer amount;
-    private String category;
-    private String method;
-    private String memo;
+    private Timestamp year;
+    public List<YearSpending> yearSpendingList;
 }

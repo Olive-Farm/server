@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import com.example.olivebookserver.dto.AllSpending;
 import com.example.olivebookserver.dto.UserSpending;
+import com.example.olivebookserver.dto.YearSpending;
 import org.apache.ibatis.annotations.*;
 
 import com.example.olivebookserver.dto.Spending;
@@ -19,15 +20,14 @@ public interface SpendingMapper {
     @Select("SELECT * FROM SPENDING")
     List<Spending> getSpendingList();
 
-    @Select("SELECT * FROM SPENDING")
+    @Select("SELECT DISTINCT USER_ID FROM SPENDING")
     @Results(id="AllSpendingMap", value={
-            @Result(property = "id", column = "SP_ID"),
             @Result(property = "userID", column = "USER_ID")
     })
     List<AllSpending> getAllSpendingList();
 
-    //사용자 ID별 출입금 내역 조회 목표
-    @Select("SELECT SP_NAME, SP_AMOUNT, SP_CATEGORY, SP_METHOD, SP_MEMO FROM SPENDING WHERE USER_ID = #{userID}")
+    //사용자 ID별 출입금 내역 조회
+    @Select("SELECT SP_TIME, SP_NAME, SP_AMOUNT, SP_CATEGORY, SP_METHOD, SP_MEMO FROM SPENDING WHERE USER_ID = #{userID}")
     @Results(id="UserSpendingMap", value={
             @Result(property = "time", column = "SP_TIME"),
             @Result(property = "name", column = "SP_NAME"),
@@ -36,7 +36,29 @@ public interface SpendingMapper {
             @Result(property = "method", column = "SP_METHOD"),
             @Result(property = "memo", column = "SP_MEMO")
     })
-    List<UserSpending> getByUserID(@Param("userID") String userID);
+    List<YearSpending> getByYear(@Param("userID") String userID);
+
+    //사용자 ID별, 년도별 출입금 내역 조회 목표
+    @Select("SELECT DISTINCT DATE_FORMAT(SP_TIME, '%Y') FROM SPENDING WHERE USER_ID = #{userID}")
+    @Results(id="UserSpendingYearMap", value={
+            @Result(property="year", column="SP_TIME"),
+    })
+    List<UserSpending> getUserSpendingList(@Param("userID") String userID);
+
+    //사용자 ID별, 년도별, 달별 출입금 내역 조회 목표
+    /*@Select("SELECT DATE_FORMAT(SP_TIME, '%M') FROM SPENDING")
+    @Results(id="UserSpendingYearMap", value={
+            @Result(property="month", column="SP_TIME")
+    })
+    List<UserMonthSpending> getByUserMonthList();
+
+    //사용자 ID별, 년도별, 달별, 일별 내역 조회 목표
+    @Select("SELECT DATE_FORMAT(SP_TIME, '%D') FROM SPENDING")
+    @Results(id="UserSpendingYearMap", value={
+            @Result(property="day", column="SP_TIME")
+    })
+    List<UserDaySpending> getByUserDayList();*/
+
 
 
     //출입금 내역 입력
