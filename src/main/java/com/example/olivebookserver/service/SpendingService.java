@@ -1,8 +1,6 @@
 package com.example.olivebookserver.service;
 
-import com.example.olivebookserver.dto.AllSpending;
-import com.example.olivebookserver.dto.UserSpending;
-import com.example.olivebookserver.dto.Spending;
+import com.example.olivebookserver.dto.*;
 import com.example.olivebookserver.mybatis.SpendingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,18 +18,24 @@ public class SpendingService {
         if(allSpendingList != null && allSpendingList.size() > 0) {
             for(AllSpending allSpending : allSpendingList){
                 allSpending.setUserSpendingList(spendingMapper.getUserSpendingList(allSpending.getUserID()));
-                setAllUser(allSpending.getUserID(), allSpending.userSpendingList);
+                if (allSpending.userSpendingList != null) {
+                    for(UserSpending userSpending : allSpending.userSpendingList) {
+                        userSpending.setYearSpendingList(spendingMapper.getYearSpendingList(allSpending.getUserID(), userSpending.getYear()));
+                        if (userSpending.yearSpendingList != null){
+                            for (YearSpending yearSpending : userSpending.yearSpendingList){
+                                yearSpending.setMonthSpendingList(spendingMapper.getMonthSpendingList(allSpending.getUserID(), userSpending.getYear(), yearSpending.getMonth()));
+                                if (yearSpending.monthSpendingList != null){
+                                    for (MonthSpending monthSpending : yearSpending.monthSpendingList){
+                                        monthSpending.setDaySpendingList(spendingMapper.getByDay(allSpending.getUserID(), userSpending.getYear(), yearSpending.getMonth(), monthSpending.getDay()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         return allSpendingList;
     }
 
-    public List<UserSpending> setAllUser(String userID, List<UserSpending> userSpendingList) {
-        if (userSpendingList != null && userSpendingList.size() > 0) {
-            for(UserSpending userSpending : userSpendingList) {
-                userSpending.setYearSpendingList(spendingMapper.getByYear(userID));
-            }
-        }
-        return userSpendingList;
-    }
 }

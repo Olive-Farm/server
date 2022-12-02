@@ -15,14 +15,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "YEAR_SPENDING")
+//@Entity(name = "YEAR_SPENDING")
 public class YearSpending {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Timestamp time;
-    private String name;
-    private Integer amount;
-    private String category;
-    private String method;
-    private String memo;
+    private String month;
+    public List<MonthSpending> monthSpendingList;
 }
