@@ -4,7 +4,6 @@ import com.example.olivebookserver.dto.AllSpending;
 import com.example.olivebookserver.mybatis.SpendingMapper;
 import com.example.olivebookserver.dto.Spending;
 import java.sql.Timestamp;
-//import com.example.olivebookserver.repository.UserRepository;
 
 import com.example.olivebookserver.service.SpendingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,16 +41,16 @@ public class Controller {
     }
 
     //데이터 삽입
-    @PostMapping("/list/{spID}")
-    public void postSpending(@PathVariable("spID") Integer spID, @RequestParam("userID") String userID
+    @PutMapping("/list/insert")
+    public void postSpending(@RequestParam("userID") String userID
             , @RequestParam("spTime") Timestamp spTime, @RequestParam("spName") String spName,
             @RequestParam("spAmount") Integer spAmount, @RequestParam("spCategory") String spCategory,
             @RequestParam("spMethod") String spMethod, @RequestParam("spMemo") String spMemo) {
-        mapper.insertSpending(spID, userID, spTime, spName, spAmount, spCategory, spMethod, spMemo);
+        mapper.insertSpending(userID, spTime, spName, spAmount, spCategory, spMethod, spMemo);
     }
 
     //데이터 수정
-    @PutMapping("/list/{spID}")
+    @PostMapping("/list/{spID}")
     public void putSpending(@PathVariable("spID") Integer spID, @RequestParam("userID") String userID
             , @RequestParam("spTime") Timestamp spTime, @RequestParam("spName") String spName,
                             @RequestParam("spAmount") Integer spAmount, @RequestParam("spCategory") String spCategory,

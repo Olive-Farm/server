@@ -60,9 +60,9 @@ public interface SpendingMapper {
 
 
     //출입금 내역 입력
-    @Insert("INSERT INTO SPENDING VALUES(#{spID}, #{userID}, #{spTime}, #{spName}, " +
+    @Insert("INSERT INTO SPENDING (USER_ID, SP_TIME, SP_NAME, SP_AMOUNT, SP_CATEGORY, SP_METHOD, SP_MEMO) VALUES(#{userID}, #{spTime}, #{spName}, " +
             "#{spAmount}, #{spCategory}, #{spMethod}, #{spMemo})")
-    int insertSpending(@Param("spID") Integer spID, @Param("userID") String userID
+    int insertSpending(@Param("userID") String userID
             , @Param("spTime") Timestamp spTime, @Param("spName") String spName, @Param("spAmount") Integer spAmount,
                    @Param("spCategory") String spCategory,
                    @Param("spMethod") String spMethod, @Param("spMemo") String spMemo);
@@ -78,7 +78,7 @@ public interface SpendingMapper {
                    @Param("spMethod") String spMethod, @Param("spMemo") String spMemo);
 
     //출입금 내역 삭제
-    @Delete("DELETE from SPENDING WHERE SP_ID=#{spID}")
+    @Delete("DELETE FROM SPENDING WHERE SP_ID=#{spID}")
     int deleteSpending(@Param("spID") Integer spID);
 
 }

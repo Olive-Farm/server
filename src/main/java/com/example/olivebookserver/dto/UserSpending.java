@@ -5,17 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * 사용자별 데이터가 담고 있는 정보(년도, 년도별 출입금 내역 정보)
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@Entity(name = "USER_SPENDING")
 public class UserSpending {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

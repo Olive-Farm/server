@@ -1,7 +1,5 @@
 package com.example.olivebookserver.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,10 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
- * SPENDING 테이블에 대한 클래스입니다. 이미지 관한 변수는 추후 구현
+ * 각 출입금 정보 개별에 대한 클래스입니다(삭제, 개별조회, 수정, 입력에 사용). 이미지 관한 변수는 추후 구현
  */
 @Data
 @AllArgsConstructor
